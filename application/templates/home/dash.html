@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %} Tableau de bord | {{ super() }}  {% endblock %}
+
+{% block menu %}  {% include 'includes/nav_menu.html' %}  {% endblock %}
+
+{% block layout_content %}
+    <div class="pt-3 mt-2">
+
+        <div class="col-md-10 offset-md-1 col-xs-12 card-bg">
+
+            <h2>Classement des participations</h2>
+            <hr/>
+            <table class="table table-bordered">
+              <thead class="thead-default">
+                <tr>
+                  <th>#</th>
+                  <th>Nom du participant</th>
+                  <th>Nbr de reponse</th>
+                  <th>Pourcentage</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for part in list_part %}
+                  <tr>
+                      <td>{{ loop.index }}</td>
+                      <td>{{ part.user.get().full_name() }}</td>
+                      <td>{{ part.nbr_reponse }}</td>
+                      <td>
+                          {{ part.pourcentage }} %
+                      </td>
+                  </tr>
+              {% else %}
+                  <tr>
+                      <td class="h3 text-xs-center" colspan="4">Aucune Question</td>
+                  </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+            {{ pagination.links }}
+
+
+        </div>
+
+    </div>
+{% endblock %}
+

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Bienvenue | {{ super() }}  {% endblock %}
+
+{% block menu %}  {% include 'includes/nav_user.html' %}  {% endblock %}
+
+{% block layout_content %}
+<div class="pt-3 mt-2">
+    <div class="col-md-10 offset-md-1 col-xs-12">
+        {% include 'includes/flash_message.html' %}
+        <div class="jumbotron">
+          <h1 class="display-4">Bienvenue {{ current_user.full_name() }}!</h1>
+          <hr class="my-2">
+          <p class="h4">Vous avez droit à {{ participed.nbr_participation }} participation(s) à ce jeu. {% if participed.nbr_participation >= 2 %} Multipliez vos chances afin d'obtenir un meuilleur score. {% endif %}
+
+          <p class="h5">Il vous reste {{ (participed.nbr_participation - current_user.nbr_participation()) }} participation(s) à ce jeu.</p>
+            <br/>
+          <p class="lead">
+            <a class="btn btn-outline-primary btn-lg {% if not question or not (participed.nbr_participation - current_user.nbr_participation()) %} disabled {% endif %}" href="{{ url_for('user.participation_jeu') }}">Participez maintenant !</a>
+          </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

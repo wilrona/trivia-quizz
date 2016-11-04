@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %} Bienvenu | {{ super() }}  {% endblock %}
+
+{% block menu %}  {% include 'includes/nav_user.html' %}  {% endblock %}
+
+{% block layout_content %}
+    <div class="pt-3 mt-2">
+        <div class="col-md-10 offset-md-1 col-xs-12">
+            <br/>
+            <h1>Vos questions {{ qnumber }}</h1>
+            <br/>
+
+            <form id="formulaire" method="post">
+                {% for data in questions %}
+                    {% if data.num in num_question %}
+                        <div class="card">
+                          <div class="card-block">
+                            <p class="card-text h4 font-italic">
+                                {{ data.libelle }}
+                            </p>
+                          </div>
+                          <input type="hidden" name="reponse" value="" class="input_reponse"/>
+                          <ul class="list-group list-group-flush listing">
+                            {% for reponse in data.list_reponse() %}
+                              <li class="list-group-item select_reponse" id="{{ reponse.key.id() }}">
+                                {{ reponse.libelle }}
+                              </li>
+                            {% endfor %}
+                          </ul>
+                        </div>
+                    {% endif %}
+
+                {% endfor %}
+
+            <br/>
+            <button class="btn btn-success float-md-right btn-block" type="submit" id="submit">Validez les réponses</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer_script %}
+
+    <script>
+
+        $('.select_reponse').on('click', function(){
+            $parent = $(this).parent();
+            $parent.find('.select_reponse.list-group-item-success').removeClass('list-group-item-success');
+            $(this).addClass('list-group-item-success');
+            $id = $(this).attr('id');
+
+            $Grd_parent = $parent.parent();
+            $Grd_parent.find('.input_reponse').val($id);
+            refresh_input();
+        });
+
+        $('#formulaire').find('.input_reponse').each(function(){
+            if($(this).val() == ''){
+                $('#submit').attr('disabled', 'disabled');
+            }
+        });
+
+        function refresh_input(){
+            $('#formulaire').find('.input_reponse').each(function(){
+                if($(this).val() == ''){
+                    $('#submit').attr('disabled', 'disabled');
+                }else{
+                    $('#submit').removeAttr('disabled');
+                }
+            })
+        }
+
+    </script>
+
+{% endblock %}

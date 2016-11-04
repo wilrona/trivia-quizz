@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %} Question | {{ super() }}  {% endblock %}
+
+{% block menu %}  {% include 'includes/nav_menu.html' %}  {% endblock %}
+{% block layout_content %}
+<div class="pt-3 mt-2">
+    <div class="col-md-10 offset-md-1 col-xs-12 card-bg">
+
+        <nav class="navbar navbar-light">
+            <a href="{{ url_for('question.index') }}" class="btn btn-link"> Retour à la liste des questions</a>
+            <div class="nav navbar-nav float-xs-right">
+                <a class="nav-item btn btn-outline-primary" href="{{ url_for('question.create_question', id_question=the_question.key.id()) }}">Modifier la question</a>
+           </div>
+        </nav>
+        <hr/>
+
+        <div class="card card-block">
+              <h3 class="card-title">Question :</h3>
+              <hr/>
+              <p class="card-text">
+                  {{ the_question.libelle }}
+              </p>
+        </div>
+        <hr/>
+        <nav class="navbar navbar-light bg-faded">
+            <h3 class="float-xs-left">Reponse de la question</h3>
+            <div class="nav navbar-nav float-xs-right">
+                <a class="nav-item btn btn-outline-primary" href="{{ url_for('question.create_reponse', id_question=the_question.key.id()) }}">Ajouter une reponse</a>
+           </div>
+        </nav>
+        <br/>
+        {% if the_question.nbr_reponse() == 1 %}
+            <div class="alert alert-danger" role="alert">
+              <strong>Attention!</strong> Cette question ne va pas figurer dans le jeu car elle doit posseder au moin deux reponses
+            </div>
+        {% endif %}
+
+
+        {% if not the_question.correct() and the_question.nbr_reponse() > 1 %}
+            <div class="alert alert-warning" role="alert">
+              <strong>Warning!</strong> Aucune des reponses ci-dessous n'a été définit comme <strong>la bonne reponse</strong>
+            </div>
+        {% endif %}
+        <br/>
+        <ul class="list-group">
+            {% for reponse in the_question.list_reponse() %}
+                  <li class="list-group-item">
+                      <span class="float-xs-right">
+                          <a href="{{ url_for('question.correct_reponse', id_reponse=reponse.key.id()) }}"><span class="tag {% if reponse.correct %} tag-success {% else %}tag-danger {% endif %}tag-pill">{% if reponse.correct %}Reponse correcte{% else %}Reponse non correcte{% endif %}</span></a>
+                          <a href="{{ url_for('question.create_reponse', id_question=the_question.key.id(), id_reponse=reponse.key.id()) }}"><span class="tag tag-default tag-pill"><i class="fa fa-pencil"></i></span></a>
+                          <a href="{{ url_for('question.delete_reponse', id_reponse=reponse.key.id()) }}"><span class="tag tag-default tag-pill"><i class="fa fa-times"></i></span></a>
+                      </span>
+                    {{ reponse.libelle }}
+                  </li>
+            {% else %}
+                  <li class="list-group-item">
+                    Aucune réponse
+                  </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</div>
+{% endblock %}

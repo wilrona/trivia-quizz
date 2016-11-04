@@ -1,0 +1,53 @@
+html, body {
+    background-color: inherit;
+    background-image: url('/static/img/bgimage.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    
+}
+
+.masthead-brand small{
+    font-size: 12px;
+    text-align: right;
+    border-left: 1px solid #fff;
+    padding-left: 5px;
+}
+
+.cover {
+    color: #000;
+    text-shadow: initial;
+    height: 400px;
+    margin-top: 70px;
+}
+
+.card-no-border{
+    border: none;
+}
+
+.card-title-header{
+    background: #4d5059;
+    color: #fff;
+    text-transform: uppercase;
+        font-size: 25px;
+}
+
+.card .card-text{
+    text-align: left;
+}
+
+.mastfoot .inner{
+    padding: 0;
+}
+
+.col-left{
+    color: #fff;
+    text-align: left;
+    background: rgba(0,0,0,.4);
+    padding: 50px;
+}
+
+.col-left-principe{
+    /*padding: initial;*/
+}

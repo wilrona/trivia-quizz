@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} Reponse à une question | {{ super() }}  {% endblock %}
+
+{% block menu %}  {% include 'includes/nav_menu.html' %}  {% endblock %}
+
+
+{% block layout_content %}
+<div class="pt-3 mt-2">
+    <div class="col-md-10 offset-md-1 col-xs-12">
+
+        <nav class="navbar navbar-light">
+            <a href="{{ url_for('question.views_question', id_question=id_question) }}" class="btn btn-link"> Retour à la question : <strong>{{ the_question.libelle }}</strong></a>
+        </nav>
+        <hr/>
+
+        <div class="card card-block">
+              <h3 class="card-title">Editer une reponse</h3>
+               <hr/>
+              <div class="card-text">
+                  <form method="post">
+                      <div class="form-group">
+                        <label>Rédiger votre reponse</label>
+                        <textarea class="form-control" id="exampleTextarea" rows="10" name="question" required>{% if id_reponse %} {{ the_reponse.libelle }} {% endif %}</textarea>
+                      </div>
+
+                      <button type="submit" class="btn btn-primary">Valider les informations</button>
+                    {% if id_reponse %}
+                      <a href="{{ url_for('question.views_question', id_question=id_question) }}" class="btn btn-outline-danger">Annuler</a>
+                    {% endif %}
+                  </form>
+              </div>
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}

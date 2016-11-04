@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %} Paramètre | {{ super() }}  {% endblock %}
+
+{% block menu %}  {% include 'includes/nav_menu.html' %}  {% endblock %}
+
+{% block layout_content %}
+
+
+    <div class="pt-3 mt-2">
+
+        <div class="col-md-8 offset-md-2 col-xs-12 offset-xs-0">
+
+           <div class="card card-block">
+              <h3 class="card-title">Pametrage du jeux</h3>
+               <hr/>
+              <div class="card-text">
+                  <form method="post">
+                      <div class="form-group">
+                        <label>Nombre de participation d'un candidat au jeu :</label>
+                        <input type="number" class="form-control" min="1"  name="participation" value="{% if current_param and current_param.nbr_participation %}{{ current_param.nbr_participation }}{% else %}1{% endif %}" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Nombre de question à repondre par un utilisateur :</label>
+                        <input type="number" class="form-control" min="5" value="{% if current_param and current_param.nbr_question %}{{ current_param.nbr_question }}{% else %}5{% endif %}" name="question" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Date de l'evenement :</label>
+                        <input type="date" class="form-control" name="date" value="{% if current_param and current_param.date_event %}{{ current_param.date_event|format_date("%Y-%m-%d") }}{% endif %}" required>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Enregistrer les informations</button>
+                  </form>
+              </div>
+           </div>
+        </div>
+
+    </div>
+
+{% endblock %}

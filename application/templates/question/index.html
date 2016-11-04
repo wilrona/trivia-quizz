@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %} Question | {{ super() }}  {% endblock %}
+
+{% block menu %}  {% include 'includes/nav_menu.html' %}  {% endblock %}
+
+{% block layout_content %}
+<div class="pt-3 mt-2">
+
+        <div class="col-md-10 offset-md-1 col-xs-12 card-bg">
+            <nav class="navbar navbar-light">
+                <div class="nav navbar-nav float-xs-right">
+                    <a class="nav-item btn btn-outline-primary" href="{{ url_for('question.create_question') }}">Creer une question</a>
+               </div>
+            </nav>
+            <hr/>
+            <table class="table table-bordered">
+              <thead class="thead-default">
+                <tr>
+                  <th>#</th>
+                  <th>Question</th>
+                  <th>Response</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for question in list_question %}
+                  <tr>
+                      <td>{{ loop.index }}</td>
+                      <td>{{ question.libelle }}</td>
+                      <td>{{ question.nbr_reponse() }} Reponse(s)</td>
+                      <td>
+                          <div class="btn-toolbar">
+                              <div class="btn-group">
+                                  <a href="{{ url_for('question.views_question', id_question=question.key.id()) }}" class="btn btn-link btn-sm" ><i class="fa fa-eye"></i></a>
+                                  <a href="{{ url_for('question.delete_question', id_question=question.key.id()) }}" class="btn btn-link btn-sm" ><i class="fa fa-times"></i></a>
+                              </div>
+                          </div>
+                      </td>
+                  </tr>
+              {% else %}
+                  <tr>
+                      <td class="h3 text-xs-center" colspan="4">Aucune Question</td>
+                  </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+            {{ pagination.links }}
+        </div>
+
+</div>
+
+{% endblock %}

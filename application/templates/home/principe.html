@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block style_block %}{# page-specific CSS #}
+        <link href="/static/css/cover.css" rel="stylesheet" />
+        <link href="/static/css/app.css" rel="stylesheet" />
+{% endblock %}
+{% block layout_body %}
+<div class="site-wrapper">
+
+    <div class="site-wrapper-inner">
+
+    <div class="cover-container">
+
+        <div class="masthead clearfix">
+            <div class="inner">
+                <h3 class="masthead-brand">
+                    Trivia Quizz
+                    <small>by perenco</small>
+
+                </h3>
+                {% include 'includes/nav_home.html' %}
+            </div>
+        </div>
+
+        <div class="inner cover">
+            <div class="row">
+                <div class="col-xs-12 col-left col-left-principe">
+                    <h1 class="display-4">Principe du jeu</h1>
+                    <p class="lead mt-2 align-middle">
+                        Avant le jour J:
+                        <ul>
+                            <li>Incrivez-vous via le formulaire (Nom, Prenom, Matricule en entreprise)</li>
+                        </ul>
+                    </p>
+                    <p class="lead mt-2 align-middle">
+                        Le soir du jour J:
+                        <ul>
+                            <li>Connectez-vous avec votre matricule (connexion possible pour ceux inscris précédemment)</li>
+                            <li>Repondez aux 05 questions posées en cochant une seule réponse à chaque fois puis validez</li>
+                            <li>L'hotesse vérifiera vos resultats et si vous avez réalisé un "Sans Faut", elle vous remettra un ticket <strong>"Finaliste Enchères"</strong></li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mastfoot">
+            <div class="inner">
+                <p>Design by <a href="https://www.accentcom.agency">Accent Com</a></p>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

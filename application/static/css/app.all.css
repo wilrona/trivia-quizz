@@ -1,0 +1,50 @@
+body{
+    background-color: #fafafa;
+    padding-bottom: 50px;
+}
+
+.card-bg{
+    position: relative;
+    display: block;
+    margin-bottom: 0.75rem;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 20px;
+}
+textarea {
+    resize: none;
+}
+.bg-perenco{
+    background-color: rgba(77,80,89,.8);
+    border-radius: inherit;
+}
+
+.navbar-brand{
+    color:#fff !important;
+}
+.navbar-brand small{
+    font-size: 12px;
+    text-align: right;
+    border-left: 1px solid #fff;
+    padding-left: 5px;
+}
+
+.navbar-toggler{
+    width: auto !important;
+}
+
+.navbar-nav .nav-link, .navbar-toggler{
+    color: #fff !important;
+}
+
+.navbar-nav .nav-link:hover{
+    text-decoration: underline;
+}
+
+.navbar-nav .active{
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+

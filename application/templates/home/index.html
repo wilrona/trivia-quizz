@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block style_block %}{# page-specific CSS #}
+        <link href="/static/css/cover.css" rel="stylesheet" />
+        <link href="/static/css/app.css" rel="stylesheet" />
+{% endblock %}
+{% block layout_body %}
+
+    <div class="site-wrapper">
+
+        <div class="site-wrapper-inner">
+
+    <div class="cover-container">
+
+        <div class="masthead clearfix">
+            <div class="inner">
+                <h3 class="masthead-brand">
+                    Trivia Quizz
+                    <small>by perenco</small>
+
+                </h3>
+                {% include 'includes/nav_home.html' %}
+            </div>
+        </div>
+
+        <div class="inner cover">
+            <div class="row flex-items-xs-middle pt-2">
+                {% include 'includes/flash_message.html' %}
+                <div class="col-xs-12 col-sm-7 col-left mb-3 mt-2">
+                    <h1 class="display-4">C'est quoi Trivia Quizz ?</h1><hr>
+                    <p class="lead mt-3 align-middle">
+                        il s'agit d'un quizz sur le format <strong>Questions à choix multiple</strong> autour de vie de Perenco: Histoire, Personnalités marquantes, Culture d'entreprise, Valeur, ...
+                        <br>
+                        Ce quizz tiendra lieu de qualitification pour un autre jeu dénommé les enchères.
+                    </p>
+                </div>
+                <div class="col-xs-12 col-sm-5 mb-3">
+                    <div class="card card-no-border">
+                        {% if inscription %}
+                            <div class="card-header card-title-header text-xs-left">
+                                Vous êtes employé perenco ?
+                            </div>
+                            <div class="card-block">
+                                <h4 class="card-title text-xs-left">Incrivez vous à ce jeu de quizz</h4>
+                                <form action="{{ url_for('user.inscrit') }}" method="POST">
+                                    <div class="card-text">
+                                            <div class="form-group">
+                                                <label>Nom <small class="text-danger float-xs-right">*</small></label>
+                                                <input type="text" class="form-control" name="last_name" required  placeholder="Votre nom" autocomplete="false">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Prenom <small class="text-danger float-xs-right">*</small></label>
+                                                <input type="text" class="form-control" required  name="first_name" placeholder="Votre prenom" autocomplete="false">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Matricule <small class="text-danger float-xs-right">*</small></label>
+                                                <input type="text" class="form-control" name="matricule" required  placeholder="Votre matricule" autocomplete="false">
+                                                <small class="form-text text-muted">Ce matricule doit être correct et vous servira pour vous connecter</small>
+                                            </div>
+
+                                    </div>
+                                    <button type="submit" class="btn btn-block btn-primary card-link">Inscrivz vous</button>
+                                </form>
+                            </div>
+                        {% else %}
+                            <div class="card-header card-title-header text-xs-left">
+                                Sainte Barbe 2016
+                            </div>
+
+                            <div class="card-block" style="height:380px;">
+                                <h4 class="card-title text-xs-center">C'est la sainte barbe, passez une excelente soirée.
+                                    <br/>
+                                    {% if not fin %}
+                                        <span class="text-success h3">Le jeu est ouvert</span>
+                                    {% else %}
+                                        <span class="text-danger h3">Le jeu est fermé</span>
+                                    {% endif %}
+
+                                </h4>
+
+                                <form method="post" action="{{ url_for('user.login') }}">
+                                    <div class="card-text">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Matricule <small class="text-danger float-xs-right">*</small></label>
+                                                <input type="text" class="form-control" name="matricule" required id="exampleInputEmail1" placeholder="Votre matricule" autocomplete="false" {% if fin %} disabled {% endif %}>
+                                            </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-block btn-primary card-link" {% if fin %} disabled {% endif %}>Connexion</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mastfoot">
+            <div class="inner">
+                <p>Design by <a href="https://www.accentcom.agency">Accent Com</a></p>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+    </div>
+
+
+
+{% endblock %}
